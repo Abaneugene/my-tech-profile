@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chenui Eugene - Tech Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#0a0e1a;color:#e2e8f0;font-family:Arial,sans-serif;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,196,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,196,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:#7c3aed;border-radius:2px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(10,14,26,0.95);border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-logo{font-size:15px;color:#00f5c4;letter-spacing:2px;font-weight:bold;}
+.nav-logo span{color:#e2e8f0;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{color:#64748b;text-decoration:none;font-size:13px;letter-spacing:1px;transition:color 0.2s;}
+.nav-links a:hover{color:#00f5c4;}
+.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 5% 4rem;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,245,196,0.08);border:1px solid rgba(0,245,196,0.2);border-radius:100px;padding:6px 16px;font-size:12px;color:#00f5c4;margin-bottom:1.5rem;}
+.dot{width:7px;height:7px;background:#00f5c4;border-radius:50%;animation:blink 2s infinite;flex-shrink:0;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.hero h1{font-size:clamp(2.2rem,5.5vw,4.5rem);font-weight:900;line-height:1.1;margin-bottom:1.2rem;}
+.hero h1 .outline{color:transparent;-webkit-text-stroke:2px #00f5c4;}
+.hero h1 .green{color:#00f5c4;}
+.hero-sub{font-size:1rem;color:#64748b;line-height:1.7;margin-bottom:2rem;max-width:500px;}
+.btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{padding:12px 26px;border-radius:6px;font-size:13px;letter-spacing:1px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s;border:none;font-family:Arial,sans-serif;}
+.btn-p{background:#00f5c4;color:#0a0e1a;font-weight:bold;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,245,196,0.3);}
+.btn-o{background:transparent;color:#e2e8f0;border:1px solid rgba(255,255,255,0.15);}
+.btn-o:hover{border-color:#00f5c4;color:#00f5c4;transform:translateY(-2px);}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;margin:0 5% 3rem;position:relative;z-index:1;}
+.stat{background:#111827;padding:1.5rem 1rem;text-align:center;}
+.stat-n{font-size:2rem;font-weight:900;color:#00f5c4;}
+.stat-l{font-size:11px;color:#64748b;margin-top:4px;text-transform:uppercase;letter-spacing:1px;}
+section{padding:5rem 5%;position:relative;z-index:1;}
+.s-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#00f5c4;margin-bottom:6px;}
+.s-title{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:900;margin-bottom:0.6rem;}
+.s-desc{color:#64748b;font-size:0.95rem;max-width:540px;line-height:1.7;margin-bottom:2.5rem;}
+.sub-lbl{display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:4px;margin-bottom:1rem;}
+.lbl-c{background:rgba(96,165,250,0.12);color:#60a5fa;}
+.lbl-d{background:rgba(167,139,250,0.12);color:#a78bfa;}
+.lbl-s{background:rgba(251,146,60,0.12);color:#fb923c;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.8rem;margin-bottom:1.5rem;}
+.skill-card{background:#111827;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.2rem;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
+.skill-card:hover{border-color:rgba(0,245,196,0.35);transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,245,196,0.1);}
+.skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00f5c4,#7c3aed);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.skill-card:hover::before{transform:scaleX(1);}
+.sk-icon{font-size:1.6rem;margin-bottom:0.4rem;}
+.sk-name{font-size:14px;font-weight:700;margin-bottom:3px;}
+.sk-cat{font-size:10px;letter-spacing:1px;text-transform:uppercase;}
+.sk-arrow{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#64748b;font-size:18px;transition:all 0.2s;}
+.skill-card:hover .sk-arrow{color:#00f5c4;transform:translateY(-50%) translateX(3px);}
+.cat-c{color:#60a5fa;} .cat-d{color:#a78bfa;} .cat-s{color:#fb923c;}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;}
+.proj-card{background:#111827;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.5rem;cursor:pointer;transition:all 0.2s;}
+.proj-card:hover{border-color:rgba(124,58,237,0.4);transform:translateY(-3px);box-shadow:0 12px 30px rgba(124,58,237,0.12);}
+.proj-num{font-size:10px;color:#7c3aed;letter-spacing:2px;margin-bottom:0.7rem;}
+.proj-title{font-size:1rem;font-weight:700;margin-bottom:0.5rem;}
+.proj-desc{font-size:13px;color:#64748b;line-height:1.6;margin-bottom:0.9rem;}
+.tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{padding:3px 9px;border-radius:100px;font-size:10px;letter-spacing:0.5px;}
+.t-d{background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);color:#a78bfa;}
+.t-c{background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.25);color:#60a5fa;}
+.t-s{background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#fb923c;}
+.t-m{background:rgba(0,245,196,0.08);border:1px solid rgba(0,245,196,0.2);color:#00f5c4;}
+.more{margin-top:0.7rem;font-size:11px;color:#64748b;}
+#jobs{background:linear-gradient(180deg,transparent,rgba(245,158,11,0.03),transparent);}
+.jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
+.job-card{background:#111827;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.3rem;transition:all 0.2s;}
+.job-card:hover{border-color:rgba(245,158,11,0.35);transform:translateY(-3px);}
+.job-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.6rem;gap:0.5rem;}
+.job-title{font-size:14px;font-weight:700;}
+.job-sal{font-size:10px;color:#f59e0b;white-space:nowrap;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);padding:3px 7px;border-radius:4px;}
+.job-desc{font-size:13px;color:#64748b;line-height:1.6;margin-bottom:0.8rem;}
+.job-match{display:flex;align-items:center;gap:7px;font-size:11px;color:#00f5c4;}
+.bar{flex:1;height:3px;background:rgba(0,245,196,0.1);border-radius:2px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,#00f5c4,#7c3aed);border-radius:2px;width:0;transition:width 1.4s ease;}
+#certifications{background:linear-gradient(180deg,transparent,rgba(0,245,196,0.02),transparent);}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;}
+.cert-card{background:#111827;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.2rem;display:flex;align-items:flex-start;gap:0.8rem;}
+.cert-ico{width:40px;height:40px;flex-shrink:0;border-radius:9px;background:rgba(0,245,196,0.08);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.cert-name{font-size:13px;font-weight:700;margin-bottom:3px;}
+.cert-org{font-size:12px;color:#64748b;}
+.cert-st{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#00f5c4;margin-top:5px;}
+#contact{background:#111827;border-top:1px solid rgba(255,255,255,0.08);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.contact-form{display:flex;flex-direction:column;gap:0.9rem;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;}
+.fg input,.fg textarea,.fg select{background:#0a0e1a;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:11px 14px;color:#e2e8f0;font-family:Arial,sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
+.fg input:focus,.fg textarea:focus{border-color:#00f5c4;}
+.fg select option{background:#111827;}
+.fg textarea{resize:vertical;min-height:100px;}
+.contact-links{display:flex;flex-direction:column;gap:0.7rem;margin-top:1rem;}
+.c-link{display:flex;align-items:center;gap:0.8rem;padding:0.85rem 1rem;background:#0a0e1a;border:1px solid rgba(255,255,255,0.08);border-radius:9px;text-decoration:none;color:#e2e8f0;transition:all 0.2s;font-size:13px;}
+.c-link:hover{border-color:#00f5c4;color:#00f5c4;transform:translateX(4px);}
+.c-icon{font-size:1.1rem;width:26px;text-align:center;}
+.status-box{padding:0.9rem 1rem;background:rgba(0,245,196,0.05);border:1px solid rgba(0,245,196,0.15);border-radius:9px;margin-bottom:1rem;}
+.status-lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.status-val{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.overlay.on{opacity:1;pointer-events:all;}
+.modal{background:#111827;border:1px solid rgba(0,245,196,0.25);border-radius:16px;padding:2rem;max-width:520px;width:100%;position:relative;transform:translateY(20px);transition:transform 0.25s;max-height:88vh;overflow-y:auto;}
+.overlay.on .modal{transform:translateY(0);}
+.modal-x{position:absolute;top:1rem;right:1rem;background:#1a2235;border:1px solid rgba(255,255,255,0.08);border-radius:6px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#64748b;font-size:16px;transition:all 0.2s;}
+.modal-x:hover{color:#e2e8f0;border-color:#00f5c4;}
+.m-icon{font-size:1.5rem;font-weight:900;color:#00f5c4;margin-bottom:0.7rem;font-family:monospace;}
+.m-cat{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.m-title{font-size:1.4rem;font-weight:900;margin-bottom:0.8rem;}
+.m-body{font-size:14px;color:#64748b;line-height:1.8;margin-bottom:1.2rem;}
+.m-points{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.m-points li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#e2e8f0;line-height:1.6;}
+.m-points li::before{content:"-->";color:#00f5c4;flex-shrink:0;margin-top:2px;font-size:11px;}
+.m-tools{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.08);}
+.m-tools-lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.m-tools-list{display:flex;flex-wrap:wrap;gap:6px;}
+.m-tool{padding:3px 10px;background:rgba(0,245,196,0.06);border:1px solid rgba(0,245,196,0.15);border-radius:100px;font-size:11px;color:#00f5c4;}
+footer{padding:1.5rem 5%;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.08);font-size:12px;color:#64748b;flex-wrap:wrap;gap:0.5rem;position:relative;z-index:1;}
+.fa{color:#00f5c4;}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#111827;border:1px solid rgba(0,245,196,0.3);border-radius:10px;padding:0.8rem 1.2rem;display:flex;align-items:center;gap:8px;font-size:13px;z-index:999;transform:translateY(60px);opacity:0;transition:all 0.3s;}
+.toast.on{transform:translateY(0);opacity:1;}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr);}.nav-links{display:none;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Chenui<span> Eugene</span></div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#jobs">Careers</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-badge"><div class="dot"></div> Lion Tech Graduate &mdash; Class of 2024</div>
+    <h1>Cloud. DevOps.<br><span class="outline">Cybersecurity</span><br><span class="green">Expert.</span></h1>
+    <p class="hero-sub">A skilled technologist trained at Lion Tech, specialising in cloud infrastructure, CI/CD pipelines, and securing digital environments from modern threats.</p>
+    <div class="btns">
+      <a href="#skills" class="btn btn-p">Explore My Skills</a>
+      <a href="#contact" class="btn btn-o">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">3+</div><div class="stat-l">Domains Mastered</div></div>
+  <div class="stat"><div class="stat-n">19+</div><div class="stat-l">Skills Acquired</div></div>
+  <div class="stat"><div class="stat-n">8</div><div class="stat-l">Projects Built</div></div>
+  <div class="stat"><div class="stat-n">8+</div><div class="stat-l">Job Roles Ready</div></div>
+</div>
+
+<section id="skills">
+  <div class="s-label">Technical Expertise</div>
+  <h2 class="s-title">Skills I Have Mastered</h2>
+  <p class="s-desc">Click any skill card to learn exactly what it is and how I apply it. All trained under the Lion Tech programme.</p>
+  <div class="sub-lbl lbl-c">Cloud Computing</div>
+  <div class="skills-grid">
+    <div class="skill-card" onclick="showSkill(0)"><div class="sk-icon">&#9729;</div><div class="sk-name">Amazon Web Services</div><div class="sk-cat cat-c">Cloud</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(1)"><div class="sk-icon">&#9642;</div><div class="sk-name">Microsoft Azure</div><div class="sk-cat cat-c">Cloud</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(2)"><div class="sk-icon">&#127758;</div><div class="sk-name">Google Cloud GCP</div><div class="sk-cat cat-c">Cloud</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(3)"><div class="sk-icon">&#127959;</div><div class="sk-name">VPC and Networking</div><div class="sk-cat cat-c">Cloud</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(4)"><div class="sk-icon">&#128450;</div><div class="sk-name">Cloud Storage</div><div class="sk-cat cat-c">Cloud</div><span class="sk-arrow">&#8250;</span></div>
+  </div>
+  <div class="sub-lbl lbl-d" style="margin-top:2rem">DevOps</div>
+  <div class="skills-grid">
+    <div class="skill-card" onclick="showSkill(5)"><div class="sk-icon">&#128051;</div><div class="sk-name">Docker</div><div class="sk-cat cat-d">DevOps</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(6)"><div class="sk-icon">&#9096;</div><div class="sk-name">Kubernetes</div><div class="sk-cat cat-d">DevOps</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(7)"><div class="sk-icon">&#128260;</div><div class="sk-name">CI/CD Pipelines</div><div class="sk-cat cat-d">DevOps</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(8)"><div class="sk-icon">&#127956;</div><div class="sk-name">Terraform and IaC</div><div class="sk-cat cat-d">DevOps</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(9)"><div class="sk-icon">&#127807;</div><div class="sk-name">Git and GitHub</div><div class="sk-cat cat-d">DevOps</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(10)"><div class="sk-icon">&#129302;</div><div class="sk-name">Ansible</div><div class="sk-cat cat-d">DevOps</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(11)"><div class="sk-icon">&#128202;</div><div class="sk-name">Monitoring and Logging</div><div class="sk-cat cat-d">DevOps</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(12)"><div class="sk-icon">&#128039;</div><div class="sk-name">Linux Admin</div><div class="sk-cat cat-d">DevOps</div><span class="sk-arrow">&#8250;</span></div>
+  </div>
+  <div class="sub-lbl lbl-s" style="margin-top:2rem">Cybersecurity</div>
+  <div class="skills-grid">
+    <div class="skill-card" onclick="showSkill(13)"><div class="sk-icon">&#128737;</div><div class="sk-name">Network Security</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(14)"><div class="sk-icon">&#128275;</div><div class="sk-name">Penetration Testing</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(15)"><div class="sk-icon">&#128065;</div><div class="sk-name">SOC Operations</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(16)"><div class="sk-icon">&#128273;</div><div class="sk-name">IAM and Access Control</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(17)"><div class="sk-icon">&#128300;</div><div class="sk-name">Digital Forensics</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
+    <div class="skill-card" onclick="showSkill(18)"><div class="sk-icon">&#128272;</div><div class="sk-name">Cloud Security</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="s-label">Portfolio</div>
+  <h2 class="s-title">Projects I Have Built</h2>
+  <p class="s-desc">Click any project card to see full details, tools used, and key outcomes. Each project solves a real-world problem.</p>
+  <div class="proj-grid">
+    <div class="proj-card" onclick="showProject(0)"><div class="proj-num">// PROJECT 01</div><div class="proj-title">Scalable Web App on AWS</div><div class="proj-desc">Deployed a highly available 3-tier web application using EC2, RDS, and an Application Load Balancer with auto-scaling groups.</div><div class="tags"><span class="tag t-c">AWS EC2</span><span class="tag t-c">RDS</span><span class="tag t-c">ALB</span></div><div class="more">Click to read more</div></div>
+    <div class="proj-card" onclick="showProject(1)"><div class="proj-num">// PROJECT 02</div><div class="proj-title">CI/CD Pipeline with Jenkins</div><div class="proj-desc">Built an end-to-end automated pipeline covering build, test, and deployment using Jenkins, Docker, and GitHub webhooks.</div><div class="tags"><span class="tag t-d">Jenkins</span><span class="tag t-d">Docker</span><span class="tag t-m">GitHub</span></div><div class="more">Click to read more</div></div>
+    <div class="proj-card" onclick="showProject(2)"><div class="proj-num">// PROJECT 03</div><div class="proj-title">Kubernetes Microservices</div><div class="proj-desc">Containerised a microservices app and orchestrated deployment on Kubernetes with load balancing and service discovery.</div><div class="tags"><span class="tag t-d">Kubernetes</span><span class="tag t-d">Docker</span><span class="tag t-d">Helm</span></div><div class="more">Click to read more</div></div>
+    <div class="proj-card" onclick="showProject(3)"><div class="proj-num">// PROJECT 04</div><div class="proj-title">Network Penetration Test Lab</div><div class="proj-desc">Set up a virtual lab to practice ethical hacking including reconnaissance, exploitation, and post-exploitation phases.</div><div class="tags"><span class="tag t-s">Kali Linux</span><span class="tag t-s">Metasploit</span><span class="tag t-s">Nmap</span></div><div class="more">Click to read more</div></div>
+    <div class="proj-card" onclick="showProject(4)"><div class="proj-num">// PROJECT 05</div><div class="proj-title">Infrastructure as Code</div><div class="proj-desc">Automated provisioning of VPCs, subnets, EC2 instances, and security groups on AWS using reusable Terraform modules.</div><div class="tags"><span class="tag t-c">Terraform</span><span class="tag t-c">AWS</span><span class="tag t-m">IaC</span></div><div class="more">Click to read more</div></div>
+    <div class="proj-card" onclick="showProject(5)"><div class="proj-num">// PROJECT 06</div><div class="proj-title">SIEM Setup and Threat Detection</div><div class="proj-desc">Configured an ELK Stack SIEM to ingest logs from multiple sources and detect suspicious activity with custom rules.</div><div class="tags"><span class="tag t-s">ELK Stack</span><span class="tag t-s">SIEM</span><span class="tag t-s">Alerts</span></div><div class="more">Click to read more</div></div>
+    <div class="proj-card" onclick="showProject(6)"><div class="proj-num">// PROJECT 07</div><div class="proj-title">Cloud Cost Optimisation</div><div class="proj-desc">Audited an AWS environment for wasteful spend, right-sized resources, and produced a full report with 35 percent savings identified.</div><div class="tags"><span class="tag t-c">Cost Explorer</span><span class="tag t-c">Trusted Advisor</span></div><div class="more">Click to read more</div></div>
+    <div class="proj-card" onclick="showProject(7)"><div class="proj-num">// PROJECT 08</div><div class="proj-title">Automated Server Hardening</div><div class="proj-desc">Wrote Ansible playbooks to automate CIS benchmark hardening across a fleet of Linux servers for consistent security baselines.</div><div class="tags"><span class="tag t-d">Ansible</span><span class="tag t-s">CIS Benchmarks</span><span class="tag t-m">Linux</span></div><div class="more">Click to read more</div></div>
+  </div>
+</section>
+
+<section id="jobs">
+  <div class="s-label">Career Readiness</div>
+  <h2 class="s-title">Job Roles I Am Ready For</h2>
+  <p class="s-desc">Based on my Lion Tech training and projects, here are positions I can apply for right now with approximate salary ranges.</p>
+  <div class="jobs-grid">
+    <div class="job-card"><div class="job-hdr"><div class="job-title">Cloud Engineer</div><div class="job-sal">$65k-$95k</div></div><div class="job-desc">Design, deploy, and manage cloud infrastructure across AWS, Azure, or GCP ensuring availability and cost efficiency.</div><div class="job-match"><span>95%</span><div class="bar"><div class="bar-fill" data-w="95"></div></div><span>Match</span></div></div>
+    <div class="job-card"><div class="job-hdr"><div class="job-title">DevOps Engineer</div><div class="job-sal">$70k-$105k</div></div><div class="job-desc">Bridge development and operations by building CI/CD pipelines, automating deployments, and managing containers.</div><div class="job-match"><span>93%</span><div class="bar"><div class="bar-fill" data-w="93"></div></div><span>Match</span></div></div>
+    <div class="job-card"><div class="job-hdr"><div class="job-title">Cybersecurity Analyst</div><div class="job-sal">$60k-$90k</div></div><div class="job-desc">Monitor, detect, and respond to security threats. Conduct vulnerability assessments and maintain security compliance.</div><div class="job-match"><span>90%</span><div class="bar"><div class="bar-fill" data-w="90"></div></div><span>Match</span></div></div>
+    <div class="job-card"><div class="job-hdr"><div class="job-title">Site Reliability Engineer</div><div class="job-sal">$75k-$110k</div></div><div class="job-desc">Maintain system reliability, reduce toil through automation, and build observability into distributed systems.</div><div class="job-match"><span>85%</span><div class="bar"><div class="bar-fill" data-w="85"></div></div><span>Match</span></div></div>
+    <div class="job-card"><div class="job-hdr"><div class="job-title">SOC Analyst Tier 1 and 2</div><div class="job-sal">$50k-$75k</div></div><div class="job-desc">Monitor security events in real-time using SIEM tools, triage alerts, escalate incidents, and document findings.</div><div class="job-match"><span>92%</span><div class="bar"><div class="bar-fill" data-w="92"></div></div><span>Match</span></div></div>
+    <div class="job-card"><div class="job-hdr"><div class="job-title">Cloud Solutions Architect</div><div class="job-sal">$85k-$130k</div></div><div class="job-desc">Design end-to-end cloud architecture. Translate business requirements into scalable and secure technical designs.</div><div class="job-match"><span>78%</span><div class="bar"><div class="bar-fill" data-w="78"></div></div><span>Match</span></div></div>
+    <div class="job-card"><div class="job-hdr"><div class="job-title">Penetration Tester</div><div class="job-sal">$65k-$100k</div></div><div class="job-desc">Ethically test systems to find vulnerabilities before attackers do. Write detailed reports with remediation steps.</div><div class="job-match"><span>80%</span><div class="bar"><div class="bar-fill" data-w="80"></div></div><span>Match</span></div></div>
+    <div class="job-card"><div class="job-hdr"><div class="job-title">IT Systems Administrator</div><div class="job-sal">$45k-$70k</div></div><div class="job-desc">Manage servers, networks, and user systems. Apply patches, automate tasks, and maintain uptime across the organisation.</div><div class="job-match"><span>97%</span><div class="bar"><div class="bar-fill" data-w="97"></div></div><span>Match</span></div></div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="s-label">Credentials</div>
+  <h2 class="s-title">Certifications and Training</h2>
+  <p class="s-desc">Industry certifications pursued alongside Lion Tech training to validate skills with globally recognised credentials.</p>
+  <div class="cert-grid">
+    <div class="cert-card"><div class="cert-ico">&#9729;</div><div><div class="cert-name">AWS Cloud Practitioner</div><div class="cert-org">Amazon Web Services</div><div class="cert-st">&#10003; Foundation Level</div></div></div>
+    <div class="cert-card"><div class="cert-ico">&#9642;</div><div><div class="cert-name">AZ-900 Azure Fundamentals</div><div class="cert-org">Microsoft</div><div class="cert-st">&#10003; In Progress</div></div></div>
+    <div class="cert-card"><div class="cert-ico">&#128039;</div><div><div class="cert-name">CompTIA Linux+</div><div class="cert-org">CompTIA</div><div class="cert-st">&#10003; Completed</div></div></div>
+    <div class="cert-card"><div class="cert-ico">&#128274;</div><div><div class="cert-name">CompTIA Security+</div><div class="cert-org">CompTIA</div><div class="cert-st">Target Cert</div></div></div>
+    <div class="cert-card"><div class="cert-ico">&#128051;</div><div><div class="cert-name">Docker Certified Associate</div><div class="cert-org">Docker Inc.</div><div class="cert-st">Target Cert</div></div></div>
+    <div class="cert-card"><div class="cert-ico">&#127956;</div><div><div class="cert-name">Terraform Associate</div><div class="cert-org">HashiCorp</div><div class="cert-st">Target Cert</div></div></div>
+    <div class="cert-card"><div class="cert-ico">&#127979;</div><div><div class="cert-name">Lion Tech Graduate Certificate</div><div class="cert-org">Lion Tech Institute</div><div class="cert-st">&#10003; Completed</div></div></div>
+    <div class="cert-card"><div class="cert-ico">&#127758;</div><div><div class="cert-name">Certified Ethical Hacker CEH</div><div class="cert-org">EC-Council</div><div class="cert-st">Target Cert</div></div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="s-label">Get In Touch</div>
+  <h2 class="s-title">Let Us Work Together</h2>
+  <p class="s-desc">Open to full-time roles, freelance contracts, internships, and collaborations. Reach out via any channel below.</p>
+  <div class="contact-grid">
+    <div>
+      <form class="contact-form" onsubmit="sendMsg(event)">
+        <div class="fg"><label>Your Name</label><input type="text" placeholder="e.g. Jane Doe" required></div>
+        <div class="fg"><label>Email Address</label><input type="email" placeholder="you@example.com" required></div>
+        <div class="fg"><label>Enquiry Type</label>
+          <select>
+            <option>Job Opportunity</option>
+            <option>Freelance Project</option>
+            <option>Collaboration</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="fg"><label>Message</label><textarea placeholder="Tell me about the opportunity..."></textarea></div>
+        <button type="submit" class="btn btn-p" style="width:100%">Send Message</button>
+      </form>
+    </div>
+    <div>
+      <div class="status-box">
+        <div class="status-lbl">Current Status</div>
+        <div class="status-val"><div class="dot"></div> Available for Hire</div>
+      </div>
+      <p style="font-size:13px;color:#64748b;margin-bottom:1rem;line-height:1.7;">Actively seeking opportunities in Cloud Engineering, DevOps, and Cybersecurity. I respond to all serious enquiries within 24 to 48 hours.</p>
+      <div class="contact-links">
+        <a href="mailto:chenuieugeneit@gmail.com" class="c-link"><span class="c-icon">&#9993;</span><div><div style="font-weight:700;font-size:13px">Email</div><div style="font-size:11px;color:#64748b">chenuieugeneit@gmail.com</div></div></a>
+        <a href="https://linkedin.com/in/chenui-eugene-a08abb128" target="_blank" class="c-link"><span class="c-icon">in</span><div><div style="font-weight:700;font-size:13px">LinkedIn</div><div style="font-size:11px;color:#64748b">linkedin.com/in/chenui-eugene-a08abb128</div></div></a>
+        <a href="https://github.com/chenuiaban" target="_blank" class="c-link"><span class="c-icon">&#128025;</span><div><div style="font-weight:700;font-size:13px">GitHub</div><div style="font-size:11px;color:#64748b">github.com/chenuiaban</div></div></a>
+        <a href="tel:+237674109532" class="c-link"><span class="c-icon">&#128222;</span><div><div style="font-weight:700;font-size:13px">Phone / WhatsApp</div><div style="font-size:11px;color:#64748b">+237 674 109 532</div></div></a>
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=NrO1k1sAAAAJ" target="_blank" class="c-link"><span class="c-icon">&#127979;</span><div><div style="font-weight:700;font-size:13px">Google Scholar</div><div style="font-size:11px;color:#64748b">scholar.google.com</div></div></a>
+        <a href="https://www.researchgate.net/profile/Chenui-Eugene" target="_blank" class="c-link"><span class="c-icon">RG</span><div><div style="font-weight:700;font-size:13px">ResearchGate</div><div style="font-size:11px;color:#64748b">researchgate.net/profile/Chenui-Eugene</div></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>&#169; 2024 <span class="fa">Chenui Eugene</span> &mdash; Lion Tech Graduate</div>
+  <div>Cloud &middot; DevOps &middot; <span class="fa">Cybersecurity</span></div>
+</footer>
+
+<div class="overlay" id="OV" onclick="bgClose(event)">
+  <div class="modal" id="MOD">
+    <div class="modal-x" onclick="closeM()">X</div>
+    <div class="m-icon" id="MI"></div>
+    <div class="m-cat" id="MC"></div>
+    <div class="m-title" id="MT"></div>
+    <div class="m-body" id="MB"></div>
+    <ul class="m-points" id="MP"></ul>
+    <div class="m-tools" id="MTS">
+      <div class="m-tools-lbl">Tools and Technologies</div>
+      <div class="m-tools-list" id="MTL"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="TOAST"><span style="color:#00f5c4">OK</span>&nbsp;<span id="TMSG">Message sent!</span></div>
+
+<script>
+var SK = [
+  {icon:"AWS",cat:"Cloud Computing",cc:"#60a5fa",title:"Amazon Web Services (AWS)",body:"AWS is the world leading cloud platform. I have hands-on experience deploying and managing cloud services across compute, storage, networking, and databases.",pts:["Launch and manage EC2 instances as virtual servers in the cloud","Configure S3 buckets for scalable and durable object storage","Set up IAM roles, users, and policies for secure access control","Use VPC, subnets, security groups, and route tables for networking","Deploy RDS databases and manage backups and multi-AZ replication"],tools:["EC2","S3","RDS","VPC","IAM","Route 53","CloudWatch","Lambda"]},
+  {icon:"Azure",cat:"Cloud Computing",cc:"#60a5fa",title:"Microsoft Azure",body:"Azure is Microsoft cloud platform with deep integration into enterprise environments. I understand Azure core services and how they compare to AWS.",pts:["Deploy Virtual Machines and configure Azure networking","Use Azure Active Directory for identity and access management","Configure Blob Storage for scalable unstructured data","Understand Azure Resource Manager and resource groups","Use Azure Monitor and Log Analytics for observability"],tools:["Azure VMs","Azure AD","Blob Storage","ARM","Azure Monitor","Azure CLI"]},
+  {icon:"GCP",cat:"Cloud Computing",cc:"#60a5fa",title:"Google Cloud Platform (GCP)",body:"GCP is known for its data and AI services. I understand GCP fundamentals and how to use core infrastructure services effectively.",pts:["Understand Compute Engine, Cloud Storage, and GKE basics","Navigate the GCP Console and use the gcloud CLI","Set up IAM permissions for GCP resources","Understand multi-region and availability zone concepts","Compare GCP services with equivalent AWS and Azure offerings"],tools:["Compute Engine","Cloud Storage","GKE","IAM","gcloud CLI","BigQuery"]},
+  {icon:"NET",cat:"Cloud Computing",cc:"#60a5fa",title:"VPC and Cloud Networking",body:"Virtual Private Cloud networking is fundamental to secure cloud architecture. I can design and configure isolated network environments in the cloud.",pts:["Design VPC architecture with public and private subnets","Configure Internet Gateways, NAT Gateways, and routing tables","Set up Security Groups and Network ACLs as cloud firewalls","Implement VPC Peering for multi-VPC architectures","Understand CIDR blocks, IP addressing, and subnetting"],tools:["AWS VPC","Subnets","Security Groups","NACL","Route Tables","NAT Gateway"]},
+  {icon:"S3",cat:"Cloud Computing",cc:"#60a5fa",title:"Cloud Storage",body:"Understanding cloud storage solutions is essential for any cloud role. I can work with object storage, block storage, and file storage services.",pts:["Create and manage S3 buckets with versioning and lifecycle policies","Configure S3 static website hosting for frontend deployments","Set up bucket policies and ACLs for secure access control","Understand EBS volumes, snapshots, and encryption at rest","Implement cross-region replication for disaster recovery"],tools:["AWS S3","EBS","EFS","S3 Glacier","Azure Blob","Lifecycle Policies"]},
+  {icon:"Docker",cat:"DevOps",cc:"#a78bfa",title:"Docker and Containerisation",body:"Docker allows applications to be packaged into portable containers. I can containerise applications, write Dockerfiles, and manage multi-container setups.",pts:["Write Dockerfiles to build custom container images","Run, stop, and manage containers with Docker CLI","Use Docker Compose to orchestrate multi-container apps","Push and pull images to and from Docker Hub and private registries","Understand container networking, volumes, and environment variables"],tools:["Docker","Dockerfile","Docker Compose","Docker Hub","Docker CLI","Docker Swarm"]},
+  {icon:"K8s",cat:"DevOps",cc:"#a78bfa",title:"Kubernetes (K8s)",body:"Kubernetes is the industry standard for container orchestration. I can deploy and manage containerised workloads at scale using K8s.",pts:["Deploy applications using Pods, Deployments, and ReplicaSets","Expose services using ClusterIP, NodePort, and LoadBalancer types","Configure ConfigMaps and Secrets for application configuration","Use Helm charts to package and deploy applications","Understand Namespaces, RBAC, and resource quota management"],tools:["kubectl","Minikube","Helm","Pods","Services","Ingress","Namespaces"]},
+  {icon:"CI/CD",cat:"DevOps",cc:"#a78bfa",title:"CI/CD Pipelines",body:"Continuous Integration and Deployment pipelines automate the software delivery process, reducing manual work and speeding up releases significantly.",pts:["Build Jenkins pipelines using Declarative and Scripted syntax","Configure GitHub Actions workflows for automated testing and deployment","Integrate Docker builds into CI/CD workflows seamlessly","Set up automated testing stages before any deployment occurs","Implement blue-green and rolling deployment strategies"],tools:["Jenkins","GitHub Actions","GitLab CI","CircleCI","ArgoCD","Webhooks"]},
+  {icon:"TF",cat:"DevOps",cc:"#a78bfa",title:"Terraform and Infrastructure as Code",body:"Terraform lets you define infrastructure in code and manage it like software. I write Terraform configurations to provision cloud resources reproducibly.",pts:["Write HCL Terraform configurations for cloud infrastructure","Use variables, outputs, and modules for reusable code","Manage Terraform state files locally and in remote backends","Plan, apply, and destroy infrastructure safely with CLI commands","Version control infrastructure changes using Git workflows"],tools:["Terraform","HCL","Terraform Cloud","AWS Provider","State Files","Modules"]},
+  {icon:"Git",cat:"DevOps",cc:"#a78bfa",title:"Git and Version Control",body:"Git is fundamental to modern software development. I use Git daily to manage code, collaborate with teams, and track changes across all projects.",pts:["Use git init, add, commit, push, and pull effectively","Work with branches, merges, and resolve merge conflicts","Create and review Pull Requests on GitHub and GitLab","Use git rebase, stash, and cherry-pick for advanced workflows","Automate workflows using GitHub Actions"],tools:["Git","GitHub","GitLab","Branching","Pull Requests","GitHub Actions"]},
+  {icon:"Ansible",cat:"DevOps",cc:"#a78bfa",title:"Ansible Configuration Management",body:"Ansible automates server configuration and deployment without agents on target machines. I write playbooks to enforce consistent system states.",pts:["Write Ansible playbooks in YAML to automate server tasks","Use Ansible inventory to manage groups of servers","Apply roles and variables for reusable modular automation","Automate security hardening and software installation tasks","Integrate Ansible with CI/CD pipelines for automated deployment"],tools:["Ansible","Playbooks","Roles","Ansible Galaxy","YAML","Inventory Files"]},
+  {icon:"MON",cat:"DevOps",cc:"#a78bfa",title:"Monitoring and Observability",body:"Knowing when systems are unhealthy is critical. I set up monitoring and logging stacks to gain full visibility into infrastructure and application performance.",pts:["Set up Prometheus to scrape and store metrics from systems","Create Grafana dashboards to visualise system health in real time","Configure alerting rules and notification channels for incidents","Use the ELK Stack for centralised log management and analysis","Use AWS CloudWatch for cloud resource monitoring and alerting"],tools:["Prometheus","Grafana","ELK Stack","CloudWatch","Alertmanager","Datadog"]},
+  {icon:"Linux",cat:"DevOps",cc:"#a78bfa",title:"Linux System Administration",body:"Linux is the operating system of the cloud. I am proficient in Linux command-line administration, scripting, and managing servers in production environments.",pts:["Navigate the Linux filesystem and manage files and permissions","Manage users, groups, and sudo access securely","Write Bash scripts to automate repetitive system tasks","Install, configure, and manage services with systemctl","Monitor system resources using top, htop, df, and netstat"],tools:["Ubuntu","CentOS","Bash","cron","systemctl","SSH","grep/sed/awk"]},
+  {icon:"NET-SEC",cat:"Cybersecurity",cc:"#fb923c",title:"Network Security",body:"Network security involves protecting the integrity and usability of network infrastructure. I understand how attacks traverse networks and how to defend against them.",pts:["Configure firewalls and understand stateful packet inspection","Analyse network traffic using Wireshark for threat detection","Understand common attacks: MITM, DoS, DNS poisoning, and ARP spoofing","Implement VPNs, DMZs, and network segmentation strategies","Use Intrusion Detection Systems to monitor and alert on traffic"],tools:["Wireshark","Firewall","IDS/IPS","VPN","Nmap","TCPDump","pfSense"]},
+  {icon:"PenTest",cat:"Cybersecurity",cc:"#fb923c",title:"Penetration Testing",body:"Penetration testing simulates real cyberattacks to find vulnerabilities before attackers do. I follow the full ethical hacking methodology from recon to reporting.",pts:["Conduct reconnaissance using OSINT techniques and Nmap scanning","Exploit known vulnerabilities using Metasploit Framework","Perform web application testing for SQLi, XSS, and CSRF","Conduct password attacks using Hydra and Hashcat tools","Write professional penetration test reports with CVSS scores"],tools:["Kali Linux","Metasploit","Nmap","Burp Suite","Hydra","Nikto","Gobuster"]},
+  {icon:"SOC",cat:"Cybersecurity",cc:"#fb923c",title:"SOC Operations",body:"A Security Operations Centre monitors and defends an organisation around the clock. I understand the tools, processes, and workflows used by SOC teams to detect and respond to threats.",pts:["Analyse SIEM alerts and triage security events by severity level","Investigate suspicious user behaviour and network anomalies","Follow incident response playbooks and escalation procedures","Create custom detection rules and correlation queries in SIEM","Document incidents and produce detailed post-incident reports"],tools:["Splunk","IBM QRadar","ELK SIEM","MITRE ATT&CK","Threat Intel","Ticketing"]},
+  {icon:"IAM",cat:"Cybersecurity",cc:"#fb923c",title:"Identity and Access Management",body:"IAM ensures the right people access the right resources at the right time. Poor IAM is one of the top causes of data breaches.",pts:["Apply Principle of Least Privilege across user accounts and roles","Configure Multi-Factor Authentication for all critical systems","Manage IAM policies and roles on AWS and Azure platforms","Understand OAuth 2.0, SAML, and Single Sign-On concepts","Audit and review access logs regularly for anomalous behaviour"],tools:["AWS IAM","Azure AD","MFA","RBAC","LDAP","OAuth 2.0","SSO"]},
+  {icon:"Forensics",cat:"Cybersecurity",cc:"#fb923c",title:"Digital Forensics",body:"Digital forensics involves collecting and analysing digital evidence from devices involved in security incidents. I understand the core forensic investigation process.",pts:["Create forensic disk images without altering original evidence","Analyse file systems, registry entries, and memory artifacts","Recover deleted files and investigate browser history trails","Follow chain-of-custody procedures for legal admissibility","Use forensic tools to investigate and document malware infections"],tools:["Autopsy","FTK Imager","Volatility","Wireshark","EnCase","Linux dd"]},
+  {icon:"CloudSec",cat:"Cybersecurity",cc:"#fb923c",title:"Cloud Security",body:"Securing cloud environments requires understanding shared responsibility, misconfigurations, and cloud-native security services. I can audit and harden cloud deployments.",pts:["Understand the AWS Shared Responsibility Model thoroughly","Audit S3 bucket permissions to prevent public data exposure","Enable AWS GuardDuty, Security Hub, and CloudTrail logging","Encrypt data at rest and in transit across cloud environments","Implement Security Groups, NACLs, and WAF for perimeter defence"],tools:["AWS Security Hub","GuardDuty","CloudTrail","WAF","KMS","Macie","IAM Analyser"]}
+];
+
+var PJ = [
+  {icon:"AWS",cat:"Cloud Computing Project",cc:"#60a5fa",title:"Scalable Web App on AWS",body:"Designed and deployed a production-grade three-tier web application on AWS ensuring high availability, fault tolerance, and automatic scaling under variable load.",pts:["Launched EC2 instances across two Availability Zones for redundancy","Configured an Application Load Balancer to distribute traffic evenly","Set up Auto Scaling Groups to handle traffic spikes automatically","Used RDS MySQL with Multi-AZ failover for the database tier","Secured all layers with Security Groups and IAM roles with no hardcoded credentials"],tools:["AWS EC2","ALB","Auto Scaling","RDS","VPC","IAM","Route 53"]},
+  {icon:"CI/CD",cat:"DevOps Project",cc:"#a78bfa",title:"CI/CD Pipeline with Jenkins and Docker",body:"Built a complete automated software delivery pipeline from code commit to deployment, cutting deployment time from hours to minutes.",pts:["Configured Jenkins on an EC2 server with GitHub webhook triggers","Pipeline stages include Code Checkout, Build Docker Image, Run Tests, Push to Registry, then Deploy","Used Docker multi-stage builds to minimise the final production image size","Implemented rollback mechanisms in case of any failed deployments","Added email and Slack notifications for pipeline status updates"],tools:["Jenkins","Docker","GitHub","Docker Hub","Webhooks","Shell Scripts","Nginx"]},
+  {icon:"K8s",cat:"DevOps Project",cc:"#a78bfa",title:"Kubernetes Microservices Deployment",body:"Containerised a sample e-commerce application made of four microservices and orchestrated the entire deployment on Kubernetes.",pts:["Split the application into 4 services: frontend, product API, cart, and auth","Wrote Kubernetes Deployment and Service manifests for each microservice","Used ConfigMaps for environment config and Secrets for credentials","Configured Horizontal Pod Autoscaler to scale on CPU usage metrics","Deployed NGINX Ingress Controller to route all external traffic"],tools:["Kubernetes","Docker","Helm","kubectl","Ingress","ConfigMaps","Minikube"]},
+  {icon:"PenTest",cat:"Cybersecurity Project",cc:"#fb923c",title:"Network Penetration Test Lab",body:"Built a fully isolated virtual lab using VirtualBox to practice ethical hacking. Conducted a full penetration test lifecycle against an intentionally vulnerable machine.",pts:["Set up isolated network with Kali Linux attacker and Metasploitable victim VMs","Performed reconnaissance including open ports, services, and OS fingerprinting","Exploited vsftpd backdoor vulnerability to gain an initial shell on the target","Escalated privileges using a local kernel exploit on the compromised system","Documented all findings in a professional report with CVSS severity scores"],tools:["Kali Linux","Metasploit","Nmap","Netcat","Nikto","VirtualBox","Metasploitable"]},
+  {icon:"TF",cat:"DevOps / IaC Project",cc:"#a78bfa",title:"Infrastructure as Code with Terraform",body:"Automated the provisioning of an entire AWS cloud environment using Terraform, replacing manual console work with version-controlled infrastructure definitions.",pts:["Wrote modular Terraform code for VPC, EC2, RDS, and S3 resources","Used variables and outputs to make all modules reusable across environments","Stored Terraform state in an S3 backend with DynamoDB state locking enabled","Implemented environment separation for dev, staging, and production workspaces","Ran terraform plan before every apply to safely review all changes first"],tools:["Terraform","HCL","AWS","S3 Backend","DynamoDB","GitHub","Modules"]},
+  {icon:"SOC",cat:"Cybersecurity Project",cc:"#fb923c",title:"SIEM Setup and Threat Detection",body:"Deployed the ELK Stack as a SIEM solution, ingested logs from multiple sources, and built detection rules to alert on simulated attack scenarios.",pts:["Installed and configured Elasticsearch, Logstash, and Kibana on Ubuntu server","Used Filebeat and Winlogbeat agents to ship logs to the SIEM platform","Created Kibana dashboards to visualise authentication events and network traffic","Wrote detection rules to alert on brute-force attempts and privilege escalation","Simulated attack scenarios and validated that all detection rules fired correctly"],tools:["Elasticsearch","Logstash","Kibana","Filebeat","Beats","Ubuntu","KQL"]},
+  {icon:"Cost",cat:"Cloud Computing Project",cc:"#60a5fa",title:"Cloud Cost Optimisation Report",body:"Conducted a thorough audit of a simulated AWS environment to identify cost inefficiencies and produced an actionable report demonstrating 35 percent potential savings.",pts:["Used AWS Cost Explorer to analyse spending patterns by service and region","Identified 12 idle EC2 instances and 6 unattached EBS volumes costing over 800 dollars per month","Recommended Reserved Instances for predictable workloads for up to 40 percent discount","Suggested S3 Intelligent-Tiering to reduce storage costs by 23 percent","Produced a board-ready report with findings, recommendations, and full ROI estimates"],tools:["AWS Cost Explorer","Trusted Advisor","Compute Optimizer","S3 Analytics"]},
+  {icon:"Ansible",cat:"DevOps / Security Project",cc:"#a78bfa",title:"Automated Server Hardening with Ansible",body:"Wrote comprehensive Ansible playbooks to automate CIS benchmark hardening on Ubuntu servers, ensuring every server meets the same security baseline automatically.",pts:["Mapped CIS Level 1 benchmarks for Ubuntu 22.04 to individual Ansible tasks","Hardened SSH configuration by disabling root login and enforcing key-based auth","Configured automatic security updates and the unattended-upgrades service","Enabled UFW firewall, removed unnecessary packages, and set filesystem permissions","Ran Lynis security audit before and after hardening to measure the score improvement"],tools:["Ansible","Playbooks","Ubuntu","CIS Benchmarks","UFW","SSH","Lynis","Bash"]}
+];
+
+function showSkill(i) { renderModal(SK[i]); }
+function showProject(i) { renderModal(PJ[i]); }
+
+function renderModal(d) {
+  document.getElementById("MI").textContent = d.icon;
+  var mc = document.getElementById("MC");
+  mc.textContent = d.cat;
+  mc.style.color = d.cc;
+  document.getElementById("MT").textContent = d.title;
+  document.getElementById("MB").textContent = d.body;
+  var mp = document.getElementById("MP");
+  mp.innerHTML = "";
+  for (var i = 0; i < d.pts.length; i++) {
+    var li = document.createElement("li");
+    li.textContent = d.pts[i];
+    mp.appendChild(li);
+  }
+  var mtl = document.getElementById("MTL");
+  mtl.innerHTML = "";
+  var mts = document.getElementById("MTS");
+  if (d.tools && d.tools.length > 0) {
+    for (var j = 0; j < d.tools.length; j++) {
+      var sp = document.createElement("span");
+      sp.className = "m-tool";
+      sp.textContent = d.tools[j];
+      mtl.appendChild(sp);
+    }
+    mts.style.display = "block";
+  } else {
+    mts.style.display = "none";
+  }
+  document.getElementById("OV").className = "overlay on";
+  document.body.style.overflow = "hidden";
+}
+
+function closeM() {
+  document.getElementById("OV").className = "overlay";
+  document.body.style.overflow = "";
+}
+
+function bgClose(e) {
+  if (e.target === document.getElementById("OV")) { closeM(); }
+}
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") { closeM(); }
+});
+
+function sendMsg(e) {
+  e.preventDefault();
+  var t = document.getElementById("TOAST");
+  document.getElementById("TMSG").textContent = "Message sent! I will respond within 24 hours.";
+  t.className = "toast on";
+  setTimeout(function() { t.className = "toast"; }, 3500);
+  e.target.reset();
+}
+
+var barsAnimated = false;
+var jobsSec = document.getElementById("jobs");
+window.addEventListener("scroll", function() {
+  if (barsAnimated) { return; }
+  var rect = jobsSec.getBoundingClientRect();
+  if (rect.top < window.innerHeight * 0.85) {
+    var fills = document.querySelectorAll(".bar-fill");
+    for (var i = 0; i < fills.length; i++) {
+      fills[i].style.width = fills[i].getAttribute("data-w") + "%";
+    }
+    barsAnimated = true;
+  }
+});
+</script>
+</body>
+</html>

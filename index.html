@@ -49,6 +49,15 @@ section{padding:5rem 5%;position:relative;z-index:1;}
 .skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00f5c4,#7c3aed);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
 .skill-card:hover::before{transform:scaleX(1);}
 .sk-icon{font-size:1.6rem;margin-bottom:0.4rem;}
+.skill-info{margin-top:2rem;padding:1.1rem;border:1px solid rgba(124,58,237,0.3);border-radius:12px;background:#0f172a;}
+.skill-info h3{margin-bottom:0.6rem;font-size:1.2rem;color:#00f5c4;}
+.skill-info p{color:#cbd5e1;line-height:1.6;margin-bottom:0.9rem;}
+.skill-info ul{list-style:none;padding-left:0;display:grid;gap:0.45rem;font-size:0.95rem;}
+.skill-info ul li::before{content:'• ';color:#7c3aed;}
+.skill-info .info-tools{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.8rem;}
+.skill-info .info-tool{padding:4px 9px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);border-radius:999px;font-size:11px;color:#a78bfa;}
+.skill-info.hidden{display:none;}
+.skill-info.visible{display:block;}
 .sk-name{font-size:14px;font-weight:700;margin-bottom:3px;}
 .sk-cat{font-size:10px;letter-spacing:1px;text-transform:uppercase;}
 .sk-arrow{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#64748b;font-size:18px;transition:all 0.2s;}
@@ -189,6 +198,13 @@ footer{padding:1.5rem 5%;display:flex;align-items:center;justify-content:space-b
     <div class="skill-card" onclick="showSkill(16)"><div class="sk-icon">&#128273;</div><div class="sk-name">IAM and Access Control</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
     <div class="skill-card" onclick="showSkill(17)"><div class="sk-icon">&#128300;</div><div class="sk-name">Digital Forensics</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
     <div class="skill-card" onclick="showSkill(18)"><div class="sk-icon">&#128272;</div><div class="sk-name">Cloud Security</div><div class="sk-cat cat-s">Cybersecurity</div><span class="sk-arrow">&#8250;</span></div>
+  </div>
+
+  <div id="skill-info" class="skill-info hidden">
+    <h3 id="skill-info-title">Select a skill to view details</h3>
+    <p id="skill-info-body">Click one of the cards above to see the detailed explanation, what I do with the skill, and the tools I use.</p>
+    <ul id="skill-info-pts"></ul>
+    <div class="info-tools" id="skill-info-tools"></div>
   </div>
 </section>
 
@@ -335,8 +351,34 @@ var PJ = [
   {icon:"Ansible",cat:"DevOps / Security Project",cc:"#a78bfa",title:"Automated Server Hardening with Ansible",body:"Wrote comprehensive Ansible playbooks to automate CIS benchmark hardening on Ubuntu servers, ensuring every server meets the same security baseline automatically.",pts:["Mapped CIS Level 1 benchmarks for Ubuntu 22.04 to individual Ansible tasks","Hardened SSH configuration by disabling root login and enforcing key-based auth","Configured automatic security updates and the unattended-upgrades service","Enabled UFW firewall, removed unnecessary packages, and set filesystem permissions","Ran Lynis security audit before and after hardening to measure the score improvement"],tools:["Ansible","Playbooks","Ubuntu","CIS Benchmarks","UFW","SSH","Lynis","Bash"]}
 ];
 
-function showSkill(i) { renderModal(SK[i]); }
+function showSkill(i) { renderModal(SK[i]); renderInlineSkill(SK[i]); }
 function showProject(i) { renderModal(PJ[i]); }
+
+function renderInlineSkill(d) {
+  document.getElementById("skill-info-title").textContent = d.title;
+  document.getElementById("skill-info-body").textContent = d.body;
+  var pts = document.getElementById("skill-info-pts");
+  pts.innerHTML = "";
+  if (d.pts && d.pts.length > 0) {
+    for (var k = 0; k < d.pts.length; k++) {
+      var li = document.createElement("li");
+      li.textContent = d.pts[k];
+      pts.appendChild(li);
+    }
+  }
+  var tools = document.getElementById("skill-info-tools");
+  tools.innerHTML = "";
+  if (d.tools && d.tools.length > 0) {
+    for (var t = 0; t < d.tools.length; t++) {
+      var span = document.createElement("span");
+      span.className = "info-tool";
+      span.textContent = d.tools[t];
+      tools.appendChild(span);
+    }
+  }
+  var info = document.getElementById("skill-info");
+  info.className = "skill-info visible";
+}
 
 function renderModal(d) {
   document.getElementById("MI").textContent = d.icon;
@@ -408,5 +450,3 @@ window.addEventListener("scroll", function() {
 </script>
 </body>
 </html>
-demo
-demo

@@ -428,7 +428,7 @@ document.addEventListener("keydown", function(e) {
 function sendMsg(e) {
   e.preventDefault();
   var t = document.getElementById("TOAST");
-  document.getElementById("TMSG").textContent = "Message sent! I will respond within 24 hours.";
+  document.getElementById("TMSG").textContent = "Message sent! I will certainly respond within 24 hours.";
   t.className = "toast on";
   setTimeout(function() { t.className = "toast"; }, 3500);
   e.target.reset();
